@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <div class="container">
+        <!-- Content here -->
+        <h1>Hello, world!</h1>
+        <form id="cmdForm">
+            <div class="form-group">
+                <label for="cmd">Command</label>
+                <input type="text" class="form-control" id="cmd" placeholder="cmd" name="cmd">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <div id="cmdText">
+
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $("input[name=cmd]").keyup(function(e)
+        {
+            e.preventDefault();
+            var cmd = $("#cmd").val();
+            cmd.replace(" ", "%20");
+            var url = "http://localhost:8000/api/command/"+cmd;
+            $.get(url)
+            .done(function(data)
+            {
+                $("#cmdText").html(data);
+            })
+            .fail(function(data)
+            {
+                $("#cmdText").html(data);
+            });
+        });
+        $("form#cmdForm").submit(function(e)
+        {
+            e.preventDefault();
+            var cmd = $("#cmd").val();
+            str.replace(" ", "%20");
+            var url = "http://localhost:8000/api/command/"+cmd;
+            $.get(url)
+            .done(function(data)
+            {
+                $("#cmdText").html(data);
+            })
+            .fail(function(data)
+            {
+                $("#cmdText").html(data);
+            });
+            // $.ajax({
+            //     url: url,
+            //     type: "get", //send it through get method
+            //     data: { 
+            //        cmd: cmd
+            //     },
+            //     success: function(response) {
+            //         //Do Something
+            //         console.log(response);
+            //     },
+            //     error: function(xhr) {
+            //         //Do Something to handle error
+            //         console.log(xhr);
+            //     }
+            // });
+        });
+    </script>
+  </body>
+</html>
